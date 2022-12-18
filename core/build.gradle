@@ -6,4 +6,7 @@ dependencies {
 	api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
 	api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
 	api "com.badlogicgames.gdx:gdx:$gdxVersion"
+	api "com.isoterik:racken:$rackenVersion"
+	api "com.isoterik:racken-physics2d:$rackenVersion"
+	api "com.isoterik:racken-animation:$rackenVersion"
 }
