@@ -17,7 +17,8 @@ import com.isoterik.racken.utils.SpriteUtils;
 
 public class DemoScene extends Scene {
     private float horizontalSpeed, verticalSpeed;
-    private ICondition.DataSource<Float> horizontalSpeedSource, verticalSpeedSource;
+    private ICondition.DataSource<Float> horizontalSpeedSource, verticalSpeedSource,
+        horizontalPositionSource, verticalPositionSource;
 
     public DemoScene() {
         setBackgroundColor(Color.BLACK);
@@ -43,7 +44,8 @@ public class DemoScene extends Scene {
         addGameObject(hero);
 
         NumericCompoundCondition jumpCondition = new NumericCompoundCondition(verticalSpeedSource)
-                .greaterThan(0f);
+                .greaterThan(0f)
+                .and();
 
         animator.addTransition(idleAnimation, jumpAnimation, true, jumpCondition);
     }
@@ -53,6 +55,8 @@ public class DemoScene extends Scene {
         public void start() {
             horizontalSpeedSource = new ICondition.DataSource<>(0f);
             verticalSpeedSource = new ICondition.DataSource<>(0f);
+            horizontalPositionSource = new ICondition.DataSource<>(0f);
+            verticalPositionSource = new ICondition.DataSource<>(0f);
         }
 
         @Override
@@ -73,6 +77,9 @@ public class DemoScene extends Scene {
 
             gameObject.transform.position.x += horizontalSpeed * deltaTime;
             gameObject.transform.position.y += verticalSpeed * deltaTime;
+
+            horizontalPositionSource.set(gameObject.transform.position.x);
+            verticalPositionSource.set(gameObject.transform.position.y);
         }
     }
 }
